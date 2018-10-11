@@ -1,0 +1,277 @@
+{
+  "version": "eosio::abi/1.0",
+  "types": [{
+      "new_type_name": "eostime",
+      "type": "uint32"
+    },{
+      "new_type_name": "time",
+      "type": "uint32"
+    }
+  ],
+  "structs": [{
+      "name": "account",
+      "base": "",
+      "fields": [{
+          "name": "owner",
+          "type": "name"
+        },{
+          "name": "balanceScaled",
+          "type": "uint128"
+        },{
+          "name": "pixelsDrawn",
+          "type": "uint64"
+        },{
+          "name": "maskScaled",
+          "type": "uint128"
+        }
+      ]
+    },{
+      "name": "guard",
+      "base": "",
+      "fields": [{
+          "name": "id",
+          "type": "uint64"
+        },{
+          "name": "quota",
+          "type": "uint64"
+        },{
+          "name": "lastResetAt",
+          "type": "eostime"
+        }
+      ]
+    },{
+      "name": "canvas",
+      "base": "",
+      "fields": [{
+          "name": "id",
+          "type": "uint64"
+        },{
+          "name": "lastPaintedAt",
+          "type": "eostime"
+        },{
+          "name": "startPaintedAt",
+          "type": "eostime"
+        },{
+          "name": "duration",
+          "type": "eostime"
+        },{
+          "name": "lastPainter",
+          "type": "name"
+        },{
+          "name": "pixelsDrawn",
+          "type": "uint64"
+        },{
+          "name": "maskScaled",
+          "type": "uint128"
+        },{
+          "name": "potScaled",
+          "type": "uint128"
+        },{
+          "name": "teamScaled",
+          "type": "uint128"
+        }
+      ]
+    },{
+      "name": "pixel",
+      "base": "",
+      "fields": [{
+          "name": "color",
+          "type": "uint32"
+        },{
+          "name": "priceCounter",
+          "type": "uint8"
+        },{
+          "name": "owner",
+          "type": "name"
+        }
+      ]
+    },{
+      "name": "pixel_row",
+      "base": "",
+      "fields": [{
+          "name": "row",
+          "type": "uint64"
+        },{
+          "name": "pixels",
+          "type": "pixel[]"
+        }
+      ]
+    },{
+      "name": "init",
+      "base": "",
+      "fields": []
+    },{
+      "name": "refresh",
+      "base": "",
+      "fields": []
+    },{
+      "name": "changedur",
+      "base": "",
+      "fields": [{
+          "name": "duration",
+          "type": "time"
+        }
+      ]
+    },{
+      "name": "end",
+      "base": "",
+      "fields": []
+    },{
+      "name": "createacct",
+      "base": "",
+      "fields": [{
+          "name": "account",
+          "type": "name"
+        }
+      ]
+    },{
+      "name": "withdraw",
+      "base": "",
+      "fields": [{
+          "name": "to",
+          "type": "name"
+        }
+      ]
+    },{
+      "name": "teamwithdraw",
+      "base": "",
+      "fields": []
+    },{
+      "name": "apply",
+      "base": "",
+      "fields": [{
+          "name": "contract",
+          "type": "name"
+        },{
+          "name": "act",
+          "type": "name"
+        }
+      ]
+    }
+  ],
+  "actions": [{
+      "name": "init",
+      "type": "init",
+      "ricardian_contract": "The intention of the author and the invoker of this contract is to create a new canvas and start the game."
+    },{
+      "name": "refresh",
+      "type": "refresh",
+      "ricardian_contract": "The intention of the author and the invoker of this contract is to refresh current canvas timer. This action may only be invoked when unexpected events cause the timer ran out."
+    },{
+      "name": "changedur",
+      "type": "changedur",
+      "ricardian_contract": "The intention of the author and the invoker of this contract is to change the canvas timer duration."
+    },{
+      "name": "end",
+      "type": "end",
+      "ricardian_contract": "The intention of the author and the invoker of this contract is to end current canvas."
+    },{
+      "name": "createacct",
+      "type": "createacct",
+      "ricardian_contract": "The intention of the author and the invoker of this contract is to create a new account for the Pixel Master application, with the name {{account}}. This account will then be able to accrue token rewards from the Pixel Master application."
+    },{
+      "name": "withdraw",
+      "type": "withdraw",
+      "ricardian_contract": "The intention of the author and the invoker of this contract is to send token earnings from the Pixel Master Account (1pixelmaster) Balance to {{to}}. Earnings may come from the Patron Bonus, Last Pixel Pot, Referral Bonus, or selling pixels to anther user. This action may only be invoked once the Game Activation Threshold for the Pixel Master canvas has been met."
+    },{
+      "name": "teamwithdraw",
+      "type": "teamwithdraw",
+      "ricardian_contract": "The intention of the author and the invoker of this contract is to send token earnings from the Pixel Master Account (1pixelmaster) Balance to Pixel Master developer team account (pixeldevteam)."
+    },{
+      "name": "apply",
+      "type": "apply",
+      "ricardian_contract": ""
+    }
+  ],
+  "tables": [{
+      "name": "account",
+      "index_type": "i64",
+      "key_names": [
+        "owner"
+      ],
+      "key_types": [
+        "name"
+      ],
+      "type": "account"
+    },{
+      "name": "guard",
+      "index_type": "i64",
+      "key_names": [
+        "id"
+      ],
+      "key_types": [
+        "uint64"
+      ],
+      "type": "guard"
+    },{
+      "name": "canvases",
+      "index_type": "i64",
+      "key_names": [
+        "id"
+      ],
+      "key_types": [
+        "uint64"
+      ],
+      "type": "canvas"
+    },{
+      "name": "pixels",
+      "index_type": "i64",
+      "key_names": [
+        "row"
+      ],
+      "key_types": [
+        "uint64"
+      ],
+      "type": "pixel_row"
+    }
+  ],
+  "ricardian_clauses": [{
+      "id": "Warranty",
+      "body": "WARRANTY. The invoker of the contract action shall uphold its Obligations under this Contract in a timely and workmanlike manner, using knowledge and recommendations for performing the services which meet generally acceptable standards set forth by EOS.IO Blockchain Block Producers."
+    },{
+      "id": "Default",
+      "body": "DEFAULT. The occurrence of any of the following shall constitute a material default under this Contract:"
+    },{
+      "id": "Remedies",
+      "body": "REMEDIES. In addition to any and all other rights a party may have available according to law, if a party defaults by failing to substantially perform any provision, term or condition of this Contract, the other party may terminate the Contract by providing written notice to the defaulting party. This notice shall describe with sufficient detail the nature of the default. The party receiving such notice shall promptly be removed from being a Block Producer and this Contract shall be automatically terminated."
+    },{
+      "id": "Force Majeure",
+      "body": "FORCE MAJEURE. If performance of this Contract or any obligation under this Contract is prevented, restricted, or interfered with by causes beyond either party's reasonable control (\"Force Majeure\"), and if the party unable to carry out its obligations gives the other party prompt written notice of such event, then the obligations of the party invoking this provision shall be suspended to the extent necessary by such event. The term Force Majeure shall include, without limitation, acts of God, fire, explosion, vandalism, storm or other similar occurrence, orders or acts of military or civil authority, or by national emergencies, insurrections, riots, or wars, or strikes, lock-outs, work stoppages, or supplier failures. The excused party shall use reasonable efforts under the circumstances to avoid or remove such causes of non-performance and shall proceed to perform with reasonable dispatch whenever such causes are removed or ceased. An act or omission shall be deemed within the reasonable control of a party if committed, omitted, or caused by such party, or its employees, officers, agents, or affiliates."
+    },{
+      "id": "Dispute Resolution",
+      "body": "DISPUTE RESOLUTION. Any controversies or disputes arising out of or relating to this Contract will be resolved by binding arbitration under the default rules set forth by the EOS.IO Blockchain. The arbitrator's award will be final, and judgment may be entered upon it by any court having proper jurisdiction."
+    },{
+      "id": "Entire Agreement",
+      "body": "ENTIRE AGREEMENT. This Contract contains the entire agreement of the parties, and there are no other promises or conditions in any other agreement whether oral or written concerning the subject matter of this Contract. This Contract supersedes any prior written or oral agreements between the parties."
+    },{
+      "id": "Severability",
+      "body": "SEVERABILITY. If any provision of this Contract will be held to be invalid or unenforceable for any reason, the remaining provisions will continue to be valid and enforceable. If a court finds that any provision of this Contract is invalid or unenforceable, but that by limiting such provision it would become valid and enforceable, then such provision will be deemed to be written, construed, and enforced as so limited."
+    },{
+      "id": "Amendment",
+      "body": "AMENDMENT. This Contract may be modified or amended in writing by mutual agreement between the parties, if the writing is signed by the party obligated under the amendment."
+    },{
+      "id": "Governing Law",
+      "body": "GOVERNING LAW. This Contract shall be construed in accordance with the Maxims of Equity."
+    },{
+      "id": "Notice",
+      "body": "NOTICE. Any notice or communication required or permitted under this Contract shall be sufficiently given if delivered to a verifiable email address or to such other email address as one party may have publicly furnished in writing, or published on a broadcast contract provided by this blockchain for purposes of providing notices of this type."
+    },{
+      "id": "Waiver of Contractual Right",
+      "body": "WAIVER OF CONTRACTUAL RIGHT. The failure of either party to enforce any provision of this Contract shall not be construed as a waiver or limitation of that party's right to subsequently enforce and compel strict compliance with every provision of this Contract."
+    },{
+      "id": "Arbitrator's Fees to Prevailing Party",
+      "body": "ARBITRATOR'S FEES TO PREVAILING PARTY. In any action arising hereunder or any separate action pertaining to the validity of this Agreement, both sides shall pay half the initial cost of arbitration, and the prevailing party shall be awarded reasonable arbitrator's fees and costs."
+    },{
+      "id": "Construction and Interpretation",
+      "body": "CONSTRUCTION AND INTERPRETATION. The rule requiring construction or interpretation against the drafter is waived. The document shall be deemed as if it were drafted by both parties in a mutual effort."
+    },{
+      "id": "In Witness Whereof",
+      "body": "IN WITNESS WHEREOF, the parties hereto have caused this Agreement to be executed by themselves or their duly authorized representatives as of the date of execution, and authorized as proven by the cryptographic signature on the transaction that invokes this contract."
+    },{
+      "id": "Game Rules",
+      "body": "GAME RULES. This clause describes the author's and contract invoker's intent of the contract. An entity automatically agrees to these rules when calling actions of this contract or when transfering funds to this contract through the eosio.token contract's actions.\n\nPurchasing New Pixels\n\nThe game begins as an empty 1000x1000 pixel canvas, with each pixel having a price of 0.05 EOS. Users paint pixels via EOS token transfers to this contract, with a memo generated by the Pixel Master interface. All funds from this initial purchase are distributed to Contract Proceeds.\n\nRepurchasing Owned Pixels\n\nIf a pixel has a previous owner, it may be repurchased for 1.35x the previous pixel price. The previous owner receives back 100% of their purchase price, plus a profit of (0.75 * 0.35) of their purchase price. (0.25 * 0.35) of the previous purchase price is distributed to Contract Proceeds.\n\nContract Proceeds\n\nContract Proceeds are distributed to the Patron Bonus (40%, updated to 55%), Last Pixel Pot (25%, updated to 10%), Referral Bonus (8%, or to Last Pixel Pot if a referral link was not used), Pixel Master development team (20%), and EOS blockchain resource costs (7%).\n\nPatron Bonus\n\nEach time a pixel is purchased, a portion of the transaction is distributed to the Account Balance of all previous pixel buyers. Each pixel painted entitles the painter to a portion of this Patron Bonus. Each user receives an amount of Patron Bonus proportional to the number of pixels that user has purchased relative to all pixels purchased.\n\nLast Pixel Pot\n\nAfter the Game Activation threshold is met, if there are no pixels purchased for 24 consecutive hours, the canvas ends. The last user to purchase a pixel will receive the entire balance of the Last Pixel Pot.\n\nReferral Bonus\n\nIf a user has purchased at least one pixel, they be able to use their referral link. Any purchases made from this link will earn the referrer a referral bonus in their Account Balance.\n\nGame Activation Threshold\n\nBefore 150,000 pixels are purchased, the Patron Bonus and referrals will still accrue in users' accounts, but withdrawal is locked. After the threshold is met, all users will be able to withdraw funds from their account balance, and the Last Pixel Pot becomes activated\n\nDisclaimer\n\nThe author disclaims all liability for the operation of the contract. No refunds or compensation will be paid. It's up to the block producers to resolve a dispute that does not conform to the intentions set by this contract's and its actions' Ricardian clauses."
+    }
+  ],
+  "error_messages": [],
+  "abi_extensions": []
+}
