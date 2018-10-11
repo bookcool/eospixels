@@ -292,7 +292,7 @@ void eospixels::withdraw(const account_name to) {
   });
 
   auto quantity = asset(withdrawAmount, EOS_SYMBOL);
-  action(permission_level{_self, N(active)}, N(eosio.token), N(transfer),
+  action(permission_level{_self, N(active)}, N(eosio), N(transfer),
          std::make_tuple(_self, to, quantity,
                          std::string("Withdraw from EOS Pixels")))
       .send();
@@ -309,7 +309,7 @@ void eospixels::deposit(const account_name user,
 }
 
 void eospixels::apply(account_name contract, action_name act) {
-  if (contract == N(eosio.token) && act == N(transfer)) {
+  if (contract == N(eosio) && act == N(transfer)) {
     // React to transfer notification.
     // DANGER: All methods MUST check whethe token symbol is acceptable.
 

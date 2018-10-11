@@ -7,7 +7,7 @@ dotenv.config({
   path: process.env.NODE_ENV === `production` ? `.env.production` : `.env`,
 })
 // used in dev only
-const eosioPrivateKey = `5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3`
+const eosioPrivateKey = `5KZifpqRTxWKbH9xNsssUwqVzV3BhpeXMqU7ttXv9t82Na7yfq2`
 
 const contractPrivate = process.env.CONTRACT_PRIVATE_KEY
 const contractPublicKey = ecc.privateToPublic(contractPrivate)

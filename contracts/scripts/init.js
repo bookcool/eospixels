@@ -17,7 +17,7 @@ async function createAccount(name, publicKey) {
   console.log(`Creating "${name}" ...`)
   await eos.transaction((tr) => {
     tr.newaccount({
-      creator: `eosio`,
+      creator: `ss`,
       name,
       owner: publicKey,
       active: publicKey,
