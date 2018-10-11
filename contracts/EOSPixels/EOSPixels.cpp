@@ -201,6 +201,7 @@ void eospixels::end() {
   canvases.emplace(_self, [&](canvas &newCanvas) {
     newCanvas.id = c.id + 1;
     newCanvas.lastPaintedAt = now();
+    newCanvas.startPaintedAt = now();
     newCanvas.duration = CANVAS_DURATION;
   });
 }
@@ -246,6 +247,7 @@ void eospixels::init() {
   canvases.emplace(_self, [&](canvas &newCanvas) {
     newCanvas.id = 0;
     newCanvas.lastPaintedAt = now();
+    newCanvas.startPaintedAt = now();
     newCanvas.duration = CANVAS_DURATION;
   });
 }

@@ -99,6 +99,7 @@ struct guard {
 struct canvas {
   uint64_t id;
   eostime lastPaintedAt;
+  eostime startPaintedAt;
   eostime duration;
   account_name lastPainter;
   uint64_t pixelsDrawn;
@@ -109,13 +110,13 @@ struct canvas {
 
   uint64_t primary_key() const { return id; }
 
-  bool isEnded() { return now() > lastPaintedAt + duration; }
+  bool isEnded() { return now() > startPaintedAt + duration + CANVAS_ADD_DURATION; }
 
   uint128_t patronBonusScaled(const account &player) const {
     return maskScaled * player.pixelsDrawn - player.maskScaled;
   }
 
-  EOSLIB_SERIALIZE(canvas, (id)(lastPaintedAt)(duration)(lastPainter)(
+  EOSLIB_SERIALIZE(canvas, (id)(lastPaintedAt)(startPaintedAt)(duration)(lastPainter)(
                                pixelsDrawn)(maskScaled)(potScaled)(teamScaled))
 };
 
