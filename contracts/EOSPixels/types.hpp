@@ -110,7 +110,7 @@ struct canvas {
 
   uint64_t primary_key() const { return id; }
 
-  bool isEnded() { return now() > startPaintedAt + duration + CANVAS_ADD_DURATION; }
+  bool isEnded() { return now() > startPaintedAt + duration + CANVAS_ADD_DURATION * pixelsDrawn; }
 
   uint128_t patronBonusScaled(const account &player) const {
     return maskScaled * player.pixelsDrawn - player.maskScaled;
