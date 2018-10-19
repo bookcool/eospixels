@@ -11,7 +11,7 @@
 #define PIXELS_PER_ROW 50
 
 #define PATRON_BONUS_PERCENTAGE_POINTS 40
-#define POT_PERCENTAGE_POINTS 42
+#define POT_PERCENTAGE_POINTS 50
 
 // number of pixels sold anything may be withdrawn
 #define WITHDRAW_PIXELS_THRESHOLD 5000
