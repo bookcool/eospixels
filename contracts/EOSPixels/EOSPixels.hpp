@@ -1,6 +1,8 @@
-#include <eosiolib/currency.hpp>
 #include <eosiolib/eosio.hpp>
+#include <eosiolib/asset.hpp>
 #include <vector>
+#include <string>
+
 
 #include "config.hpp"
 #include "types.hpp"
@@ -8,6 +10,7 @@
 #define EOS_SYMBOL S(4, EOS)  // MainNet and TestNet use EOS
 
 using namespace eosio;
+using std::string;
 
 class eospixels : public contract {
  public:
@@ -17,6 +20,12 @@ class eospixels : public contract {
         accounts(self, self),
         guards(self, self) {}
 
+  struct transfer_args {
+            account_name  from;
+            account_name  to;
+            asset         quantity;
+            string        memo;
+         };
   // the first argument of multi_index must be the name of the table
   // in the ABI!
   typedef multi_index<N(canvases), canvas> canvas_store;
@@ -24,7 +33,7 @@ class eospixels : public contract {
   typedef multi_index<N(account), account> account_store;
   typedef multi_index<N(guard), guard> guard_store;
 
-  void onTransfer(const currency::transfer& transfer);
+  void onTransfer(const transfer_args& transfer);
   /// @abi action
   void init();
   /// @abi action

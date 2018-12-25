@@ -124,7 +124,7 @@ bool eospixels::isValidReferrer(account_name name) {
   return it->pixelsDrawn > 0;
 }
 
-void eospixels::onTransfer(const currency::transfer &transfer) {
+void eospixels::onTransfer(const transfer_args &transfer) {
   if (transfer.to != _self) return;
 
   auto canvasItr = canvases.begin();
@@ -315,7 +315,7 @@ void eospixels::apply(account_name contract, action_name act) {
     // React to transfer notification.
     // DANGER: All methods MUST check whethe token symbol is acceptable.
 
-    auto transfer = unpack_action_data<currency::transfer>();
+    auto transfer = unpack_action_data<transfer_args>();
     eosio_assert(transfer.quantity.symbol == EOS_SYMBOL,
                  "must pay with EOS token");
     onTransfer(transfer);
